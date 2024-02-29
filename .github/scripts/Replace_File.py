@@ -9,24 +9,19 @@ def move_files(source_dir):
     filenames = os.listdir(source_dir)
     print('filenames', filenames)
     for filename in filenames:
-        if "readme" not in filename.lower():
-            
-            if filename.find('-') != -1:
-                continue
+        if filename.find('-') == -1:
+            continue
 
-            
-            judge = filename.split('-')[0]
-            
-            src_path = os.path.join(source_dir, filename)
-            
-            problem = filename.replace(f"{judge}-", "")
-            problem_store_folder = f"./Solutions/{judge.upper()}/{os.path.splitext(problem)[0]}"
-
-            if not os.path.exists(problem_store_folder):
-               os.makedirs(problem_store_folder)
-
-            dst_path = os.path.join(problem_store_folder, os.path.splitext(problem)[0]+f"-{len(os.listdir(problem_store_folder))}"+os.path.splitext(problem)[1])
-            shutil.move(src_path, dst_path)
+        judge = filename.split('-')[0]
+        print(filename)
+        src_path = os.path.join(source_dir, filename)
+        
+        problem = filename.replace(f"{judge}-", "")
+        problem_store_folder = f"./Solutions/{judge.upper()}/{os.path.splitext(problem)[0]}"
+        if not os.path.exists(problem_store_folder):
+           os.makedirs(problem_store_folder)
+        dst_path = os.path.join(problem_store_folder, os.path.splitext(problem)[0]+f"-{len(os.listdir(problem_store_folder))}"+os.path.splitext(problem)[1])
+        shutil.move(src_path, dst_path)
                 
 
 if __name__ == "__main__":
